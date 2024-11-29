@@ -155,7 +155,7 @@ const Navbar = () => {
               <Link
                 key={index}
                 to={`/search/${item}`}
-                className="block w-max whitespace-nowrap bg-buttonBg text-xs py-1 text-buttonText cursor-pointer rounded-full px-2"
+                className="block w-max whitespace-nowrap  text-xs py-1  border border-foreground cursor-pointer rounded-full px-2"
               >
                 {item}
               </Link>
