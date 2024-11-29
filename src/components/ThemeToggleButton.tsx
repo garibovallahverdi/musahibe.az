@@ -1,5 +1,3 @@
-import React from "react";
-import { SunIcon, MoonIcon } from "@heroicons/react"; // Heroicons kullanılıyor
 import { useTheme } from "../context/ThemeContext";
 
 const ThemeToggleButton = () => {

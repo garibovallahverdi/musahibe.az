@@ -1,13 +1,7 @@
-import React from "react";
-import NewsCard from "../../components/NewsCard";
 import RelatedBox from "../../shared/RelatedBox";
 
 const Reading = () => {
-  const relatedPosts = [
-    { id: 1, title: "How to Start Blogging", slug: "start-blogging" },
-    { id: 2, title: "10 Tips for Writing Engaging Content", slug: "writing-tips" },
-    { id: 3, title: "Understanding SEO Basics", slug: "seo-basics" },
-  ];
+
   const placeholders = Array.from({ length: 6 });
 
   const blogContent = `

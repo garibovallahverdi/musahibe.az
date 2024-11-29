@@ -1,17 +1,23 @@
 import { useMemo } from "react";
 
+type UsePaginationProps = {
+  totalItems: number;
+  itemsPerPage: number;
+  currentPage: number;
+  siblingCount?: number; 
+};
+
 export const usePagination = ({
   totalItems,
   itemsPerPage,
   currentPage,
   siblingCount = 1,
-}) => {
+}: UsePaginationProps): (number | string)[] => {
   const paginationRange = useMemo(() => {
     const totalPageCount = Math.ceil(totalItems / itemsPerPage);
 
     const totalPageNumbers = siblingCount + 5;
 
-    // Tüm sayfaları gösterebiliyorsak
     if (totalPageNumbers >= totalPageCount) {
       return Array.from({ length: totalPageCount }, (_, i) => i + 1);
     }

@@ -1,7 +1,15 @@
 import React from "react";
-import { usePagination } from "../hooks/pagination"; 
+import { usePagination } from "../hooks/pagination";
 
-const Pagination = ({
+// 1. Prop türlerini tanımlayın
+type PaginationProps = {
+  totalItems: number;
+  itemsPerPage: number;
+  currentPage: number;
+  onPageChange: (page: number) => void;
+};
+
+const Pagination: React.FC<PaginationProps> = ({
   totalItems,
   itemsPerPage,
   currentPage,
@@ -14,10 +22,10 @@ const Pagination = ({
     siblingCount: 1,
   });
 
-  if (paginationRange.length < 2) return null;
+  if (!paginationRange || paginationRange.length < 2) return null;
 
-  const onPageClick = (page) => {
-    if (page !== "...") onPageChange(page);
+  const onPageClick = (page: number | string) => {
+    if (page !== "...") onPageChange(Number(page));
   };
 
   return (
@@ -25,7 +33,9 @@ const Pagination = ({
       <li>
         <button
           className={`px-3 py-1 rounded ${
-            currentPage === 1 ? "bg-gray-300 cursor-not-allowed" : "bg-backgroundSecond"
+            currentPage === 1
+              ? "bg-gray-300 cursor-not-allowed"
+              : "bg-backgroundSecond"
           }`}
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage === 1}

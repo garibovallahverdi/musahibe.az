@@ -1,20 +1,25 @@
-import React, { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import  { useState } from "react";
+import { useParams } from "react-router-dom";
 import NewsCard from "../../components/NewsCard";
 import Pagination from "../../shared/Pagination";
 import RelatedBox from "../../shared/RelatedBox";
 import ErrorPage from "../error";
 
-const NewsPage = ({validCategories}) => {
-  const { category } = useParams(); 
-  if (!validCategories.includes(category)) {
-    return <ErrorPage />;
-}
-  const [currentPage, setCurrentPage] = useState(1);
+type NewsPageProps = {
+  validCategories: string[]; 
+};
+
+const NewsPage:React.FC<NewsPageProps> = ({validCategories}) => {
+  const { category } = useParams<{ category: string }>(); 
+  if (!category || !validCategories.includes(category)) {
+    return <ErrorPage />; 
+  }
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 10;
   const totalItems = 100;
   
-  const onPageChange = (page) => {
+  const onPageChange = (page:number) => {
     setCurrentPage(page);
   };
   const placeholders = Array.from({ length: 6 });
@@ -27,8 +32,9 @@ const NewsPage = ({validCategories}) => {
   
         </div>
   <div className="grid  gap-10 sm:grid-cols-2 md:grid-cols-3 ">
-    {placeholders.map((item, index) => (
+    {placeholders.map((_, index) => (
       <NewsCard
+      key={index}
       category={"sonxəbərlər"}
       image="https://plus.unsplash.com/premium_photo-1673014201324-2eccc35d8387?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fHw%3D"
       title="Teknoloji Dünyasında Çarpıcı Gelişmeler"

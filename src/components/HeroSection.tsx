@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const generateSlug = (title) => {
+const generateSlug = (title: string) => {
   return title.toLowerCase().replace(/ /g, "-").replace(/[^\w-]+/g, "");
 };
 
@@ -41,16 +41,7 @@ const HeroSection = () => {
     }, 500); // Animasyon süresiyle uyumlu
   };
 
-  const handlePrev = () => {
-    if (isSliding) return; // Animasyon devam ederken başka işlem yapılmasın.
-    setIsSliding(true);
-    setTimeout(() => {
-      setCurrentIndex((prevIndex) =>
-        prevIndex === 0 ? mainNews.length - 1 : prevIndex - 1
-      );
-      setIsSliding(false);
-    }, 500); // Animasyon süresiyle uyumlu
-  };
+
 
   useEffect(() => {
     const interval = setInterval(handleNext, 5000); // 5 saniyede bir otomatik kayma

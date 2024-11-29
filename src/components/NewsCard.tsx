@@ -1,17 +1,26 @@
-import React from "react";
 import { useInView } from "react-intersection-observer";
 import { Link } from "react-router-dom";
 
 
-const generateSlug = (title) => {
+const generateSlug = (title:string) => {
   return title.toLowerCase().replace(/ /g, "-").replace(/[^\w-]+/g, "");
 };
 
-const NewsCard = ({ image, category,title, description, likes, dislikes, views, time }) => {
+type NewsCardListProps = {
+  image: string; 
+  category: string;
+  title: string;
+  description: string;
+  likes: number;
+  dislikes: number;
+  views: number;
+  time: string;
+}
+const NewsCard:React.FC<NewsCardListProps>  = ({ image, category,title, description, likes, dislikes, views, time }) => {
 
     const { ref, inView } = useInView({
-        triggerOnce: true, // Animasyon yalnızca bir kez tetiklensin
-        threshold: 0.1, // Kartın %10'u göründüğünde animasyon başlasın
+        triggerOnce: true,
+        threshold: 0.1,
       });
 
       const slug = generateSlug(title)
@@ -22,13 +31,12 @@ const NewsCard = ({ image, category,title, description, likes, dislikes, views, 
     ref={ref}
     className={`max-w-sm mx-auto relative max-h-fit  bg-backgroundSecond rounded-lg shadow-md overflow-hidden 
         ${inView ? "card-animate" : ""}`}
-      >      {/* Resim */}
+      >      
     <div className="w-full  relative rounded-lg">
     <div className="w-full h-full top-0 absolute rounded-lg cursor-pointer bg-[#00000070]"></div>
 
       <img src={image} alt={title} className="w-full h-full  object-cover" />
     </div>
-      {/* İçerik */}
       <div className="p-4 flex flex-col w-full  ">
       <div className="flex items-center gap-2 justify-between  text-xs my-1 border-b-black py-1 border-b">
         <div className="flex gap-2 items-center">
@@ -39,7 +47,7 @@ const NewsCard = ({ image, category,title, description, likes, dislikes, views, 
 
           <span>{time}</span>
         </div>
-        <span className="w-max text-[10px] text-white font-medium block rounded-xl px-1 self-end uppercase bg-teal-400">Siyasət</span>
+        <span className="w-max text-[10px] text-white font-medium block rounded-xl px-1 self-end uppercase bg-teal-400">{category}</span>
         </div>
         <Link
     to={`reading/${slug}`}
@@ -49,7 +57,6 @@ const NewsCard = ({ image, category,title, description, likes, dislikes, views, 
         <p className="text-[11px] text-balance  group-hover:text-teal-600  mt-2 line-clamp-3">{description}</p>
         </Link>
 
-        {/* İstatistikler */}
         <div className="flex items-center justify-between  text-sm mt-2 cursor-pointer ">
           <div className="flex items-center gap-2 transition-all  hover:text-blue-400 ">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
@@ -74,7 +81,6 @@ const NewsCard = ({ image, category,title, description, likes, dislikes, views, 
             <span>{views}</span>
           </div>
         </div>
-        {/* Paylaşım Zamanı */}
         
       </div>
     </div>

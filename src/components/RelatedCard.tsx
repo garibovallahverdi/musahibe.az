@@ -1,6 +1,9 @@
-import React from "react";
 
-const RelatedCard = ({  title, description }) => {
+type RelatedCardListProps = {
+  title: string;       
+}
+
+const RelatedCard:React.FC<RelatedCardListProps> = ({  title }) => {
 
     
   return (
@@ -12,7 +15,6 @@ const RelatedCard = ({  title, description }) => {
       <div className="flex flex-col gap-1">
         <span className="w-max text-[10px] text-white font-medium block rounded-xl px-1 self-end uppercase bg-teal-400">Siyasət</span>
         <h2 className="text-[13px] font-semibold line-clamp-3">{title}</h2>
-        {/* <p className="text-[10px]  mt-2 line-clamp-3">{description}</p> */}
         </div>
       </div>
   );

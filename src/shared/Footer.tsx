@@ -1,17 +1,8 @@
-import React from "react";
 import Container from "../app/container";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
-  const menuItems = [
-    { title: "Ana Səhifə", link: "/" },
-    { title: "Xəbərlər", link: "/xeberler" },
-    { title: "Siyasət", link: "/siyaset" },
-    { title: "İqtisadiyyat", link: "/iqtisadiyyat" },
-    { title: "Texnologiya", link: "/texnologiya" },
-    { title: "Mədəniyyət", link: "/medeniyyet" },
-    { title: "İdman", link: "/idman" },
-  ];
+
   return (
     <Container>
 <footer className="">
