@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import NewsCard from "../../components/NewsCard";
 import Pagination from "../../shared/Pagination";
 import RelatedBox from "../../shared/RelatedBox";
-import ErrorPage from "../error";
 
 type NewsPageProps = {
   validCategories: string[]; 
