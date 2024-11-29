@@ -16,7 +16,7 @@ const MainPageCategoryList:React.FC<MainPageCategoryListProps> = ({ placeholders
 </svg>
  </Link>
         </div>
-  <div className="grid  gap-10 sm:grid-cols-2 md:grid-cols-3 ">
+  <div className="grid  gap-8 sm:grid-cols-2 md:grid-cols-3 ">
     {placeholders.map((_, index) => (
       <NewsCard
       key={index}

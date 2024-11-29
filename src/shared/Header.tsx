@@ -1,6 +1,6 @@
 import {  useEffect, useRef, useState  } from "react";
 import Container from "../app/container";
-import {  NavLink } from "react-router-dom";
+import {  Link, NavLink } from "react-router-dom";
 import SignInSubscribeBtns from "../components/SignInSubscribeBtns";
 import MobileMenu from "../components/MobileMenu";
 import ThemeToggleButton from "../components/ThemeToggleButton";
@@ -9,6 +9,28 @@ import BurgerMenuIcon from "../components/BurgerMenuIcon";
 const Navbar = () => {
   const navRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
+  const scrollContainerRef = useRef(null);
+
+  const handleMouseDown = (e) => {
+    const container = scrollContainerRef.current;
+    container.isDragging = true;
+    container.startX = e.pageX - container.offsetLeft;
+    container.scrollLeft = container.scrollLeft || 0;
+  };
+
+  const handleMouseMove = (e) => {
+    const container = scrollContainerRef.current;
+    if (!container.isDragging) return;
+    const x = e.pageX - container.offsetLeft;
+    const walk = x - container.startX; // Mouse hareket mesafesi
+    container.scrollLeft -= walk; // Kaydırma
+    container.startX = x; // Yeni başlangıç noktası
+  };
+
+  const handleMouseUpOrLeave = () => {
+    const container = scrollContainerRef.current;
+    container.isDragging = false;
+  };
 
   const menuItems = [
     { title: "Ana Səhifə", link: "/" },
@@ -61,7 +83,7 @@ const Navbar = () => {
 
   return (
     <Container>
-      <nav ref={navRef} className="w-full py-4 px-2  ">
+      <nav ref={navRef} className="w-full py-4 px-2 select-none  ">
         <div className="flex flex-col w-full space-y-2  items-center  mx-auto relative ">
           <div className="flex justify-between items-start w-full">
             <p className="text-[10px]  italic  space-x-4 items-center hidden sm:flex">
@@ -104,15 +126,27 @@ const Navbar = () => {
           {/* Mobil menü */}
           <MobileMenu menuItems={menuItems} isOpen={isOpen} setIsOpen={setIsOpen}/>
          
-      <div className="w-full  px-3 py-1 mx-auto flex overflow-x-scroll">
-        {
-        newsHeadlines.map(item=>(
-          <span className="block w-max text-nowrap cursor-pointer hover:bg-slate-300 bg-slate-200 rounded-full px-2">{item}</span>
-        ))
-        }
-      </div>
+          <div
+      className="w-full px-3 py-1 mx-auto flex overflow-x-scroll gap-2"
+      ref={scrollContainerRef}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUpOrLeave}
+      onMouseLeave={handleMouseUpOrLeave}
+      style={{ cursor: "grab" }}
+    >
+      {newsHeadlines.map((item, index) => (
+        <Link
+          key={index}
+          to={`/search/${item}`}
+          className="block w-max whitespace-nowrap bg-buttonBg text-xs py-1 text-buttonText cursor-pointer rounded-full px-2"
+        >
+          {item}
+        </Link>
+      ))}
+    </div>
         </div>
-      </nav>
+      </nav>  
     </Container>
   );
 };

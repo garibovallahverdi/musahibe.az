@@ -3,17 +3,10 @@ import { useParams } from "react-router-dom";
 import NewsCard from "../../components/NewsCard";
 import Pagination from "../../shared/Pagination";
 import RelatedBox from "../../shared/RelatedBox";
-import ErrorPage from "../error";
 
-type NewsPageProps = {
-  validCategories: string[]; 
-};
 
-const NewsPage:React.FC<NewsPageProps> = ({validCategories}) => {
-  const { category } = useParams<{ category: string }>(); 
-  if (!category || !validCategories.includes(category)) {
-    throw Error()
-  }
+const SearchPage = () => {
+  const { searchValue } = useParams<{ searchValue: string }>(); 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 10;
@@ -28,10 +21,10 @@ const NewsPage:React.FC<NewsPageProps> = ({validCategories}) => {
     <div className="p-4 grid grid-cols-12 gap-5">
       <div className="w-full flex flex-col col-span-12 lg:col-span-9 gap-5 ">
         <div className='flex w-full justify-between items-center  border-b-2 border-b-foreground py-2 mb-2 '>
-  <h1 className="text-2xl md:text-3xl font-semibold ">{category?.toUpperCase()}</h1>
+  <h1 className="text-2xl md:text-3xl font-semibold ">{searchValue?.toUpperCase()}</h1>
   
         </div>
-  <div className="grid  gap-8 sm:grid-cols-2 md:grid-cols-3 ">
+  <div className="grid  gap-10 sm:grid-cols-2 md:grid-cols-3 ">
     {placeholders.map((_, index) => (
       <NewsCard
       key={index}
@@ -61,4 +54,4 @@ const NewsPage:React.FC<NewsPageProps> = ({validCategories}) => {
   );
 };
 
-export default NewsPage;
+export default SearchPage;

@@ -29,7 +29,7 @@ const NewsCard:React.FC<NewsCardListProps>  = ({ image, category,title, descript
    
     <div
     ref={ref}
-    className={`max-w-sm mx-auto relative max-h-fit  bg-backgroundSecond rounded-lg shadow-md overflow-hidden 
+    className={`max-w-sm mx-auto relative max-h-fit  bg-cardBg rounded-lg shadow-md overflow-hidden 
         ${inView ? "card-animate" : ""}`}
       >      
     <div className="w-full  relative rounded-lg">
@@ -47,14 +47,14 @@ const NewsCard:React.FC<NewsCardListProps>  = ({ image, category,title, descript
 
           <span>{time}</span>
         </div>
-        <span className="w-max text-[10px] text-white font-medium block rounded-xl px-1 self-end uppercase bg-teal-400">{category}</span>
+        <span className="w-max text-[9px] text-white font-medium block rounded-xl px-2 self-end uppercase bg-buttonBg">{category}</span>
         </div>
         <Link
     to={`reading/${slug}`}
     className="block group" 
     >
-        <h2 className="text-[16px] transition-all group-hover:text-teal-400 font-semibold line-clamp-2">{title}</h2>
-        <p className="text-[11px] text-balance  group-hover:text-teal-600  mt-2 line-clamp-3">{description}</p>
+        <h2 className="text-[16px] transition-all text-cardText group-hover:text-teal-400 font-semibold line-clamp-2">{title}</h2>
+        <p className="text-[11px] text-balance text-cardText  mt-2 line-clamp-3">{description}</p>
         </Link>
 
         <div className="flex items-center justify-between  text-sm mt-2 cursor-pointer ">

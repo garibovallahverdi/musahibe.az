@@ -4,6 +4,7 @@ import MainPage from "../pages/main"
 import NewsPage from "../pages/news"
 import ErrorPage from "../pages/error"
 import Reading from "../pages/reading"
+import SearchPage from "../pages/search"
 
 const validCategories  =["xeberler","medeniyyet","iqtisadiyyat","texnologiya","siyaset","idman"]
 export const router = createBrowserRouter(
@@ -26,7 +27,12 @@ export const router = createBrowserRouter(
                 {
                     path:"reading/:slug",
                     element:<Reading/>
-                }
+                },
+                {
+                    path:"/search/:searchValue",
+                    element:<SearchPage/>
+                },
+              
               
             ]
             
