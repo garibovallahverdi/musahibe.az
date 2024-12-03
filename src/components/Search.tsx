@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 
 const SearchInput = () => {
   const [isOpen, setIsOpen] = useState(false); // Input görünürlüğü kontrolü
