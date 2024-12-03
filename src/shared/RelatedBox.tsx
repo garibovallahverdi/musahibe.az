@@ -7,11 +7,11 @@ const RelatedBox:React.FC<RelatedBox> = ({placeholders}) => {
   return (
     <div className="lg:col-span-3 h-max col-span-12  shadow-lg rounded-lg p-6">
     <h2 className="text-xl font-semibold mb-4">Related Posts</h2>
-    <div className="grid lg:grid-cols-1 grid-cols-3 gap-3">
+    <div className="grid lg:grid-cols-1 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-3">
       {placeholders.map((_,index:number) => (
         <RelatedCard
         key={index}
-        title="Teknoloji Dünyasında Çarpıcı Gelişmeler"
+        title="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima ut necessitatibus, neque modi laudantium magnam obcaecati unde. Maiores, nisi quasi."
         />
       ))}
     </div>

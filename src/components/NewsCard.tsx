@@ -50,9 +50,9 @@ const NewsCard:React.FC<NewsCardListProps>  = ({ image, category,title, descript
         <span className="w-max text-[9px] text-white font-medium block rounded-xl px-2 self-end uppercase bg-buttonBg">{category}</span>
         </div>
         <Link
-    to={`reading/${slug}`}
-    className="block group" 
-    >
+         to={`/reading/${slug}`}
+         className="block group" 
+           >
         <h2 className="text-[16px] transition-all text-cardText group-hover:text-teal-400 font-semibold line-clamp-2">{title}</h2>
         <p className="text-[11px] text-balance text-cardText  mt-2 line-clamp-3">{description}</p>
         </Link>

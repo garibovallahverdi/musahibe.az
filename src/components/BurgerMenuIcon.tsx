@@ -1,5 +1,6 @@
 import React from 'react'
 import ThemeToggleButton from './ThemeToggleButton'
+import SearchInput from './Search';
 
 interface MobileMenuProps {
     isOpen: boolean;
@@ -8,7 +9,9 @@ interface MobileMenuProps {
 
 const BurgerMenuIcon = ({setIsOpen, isOpen}:MobileMenuProps) => {
   return (
-    <div className=" sm:hidden flex gap-3">
+    <div className=" sm:hidden flex gap-3 items-center">
+      <SearchInput/>
+      
     <ThemeToggleButton/>
 
 

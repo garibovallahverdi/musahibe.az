@@ -1,43 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 import Container from "../app/container";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import SignInSubscribeBtns from "../components/SignInSubscribeBtns";
 import MobileMenu from "../components/MobileMenu";
 import ThemeToggleButton from "../components/ThemeToggleButton";
 import BurgerMenuIcon from "../components/BurgerMenuIcon";
+import SearchInput from "../components/Search";
+import TagComponent from "../components/TagComponent";
 
 const Navbar = () => {
   const navRef = useRef<HTMLDivElement | null>(null);
-  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  // Haber Başlıklarını sürüklemek için işlevler
-  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
-    const container = scrollContainerRef.current;
-    if (container) {
-      container.dataset.isDragging = "true";
-      container.dataset.startX = `${e.pageX - container.offsetLeft}`;
-      container.dataset.scrollLeft = `${container.scrollLeft || 0}`;
-    }
-  };
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const container = scrollContainerRef.current;
-    if (container && container.dataset.isDragging === "true") {
-      const startX = parseFloat(container.dataset.startX || "0");
-      const scrollLeft = parseFloat(container.dataset.scrollLeft || "0");
-      const x = e.pageX - container.offsetLeft;
-      const walk = x - startX; // Mouse hareket mesafesi
-      container.scrollLeft = scrollLeft - walk; // Kaydırma işlemi
-    }
-  };
-
-  const handleMouseUpOrLeave = () => {
-    const container = scrollContainerRef.current;
-    if (container) {
-      container.dataset.isDragging = "false";
-    }
-  };
+  
 
   const menuItems = [
     { title: "Ana Səhifə", link: "/" },
@@ -50,28 +24,7 @@ const Navbar = () => {
     { title: "Əlaqə", link: "/elaqe" },
   ];
 
-  const newsHeadlines = [
-    "Qarabağ Sülhü",
-    "Neft Qiymətləri",
-    "İqlim Dəyişikliyi",
-    "Təhsil Yenilikləri",
-    "Enerji Böhranı",
-    "Texnologiya İnkişafı",
-    "İdman Turniri",
-    "Yeni İxtira",
-    "Seçki Nəticələri",
-    "Koronavirus Tədqiqatı",
-    "İqtisadi Yüksəliş",
-    "Sənaye Layihələri",
-    "Turizm Mövsümü",
-    "Kənd Təsərrüfatı",
-    "Mədəniyyət Tədbirləri",
-    "Beynəlxalq Zirvə",
-    "Kosmik Missiya",
-    "Şəhər İnkişafı",
-    "Bank Faizləri",
-    "Sərgi Açılışı",
-  ];
+ 
 
   useEffect(() => {
     if (isOpen) {
@@ -112,14 +65,17 @@ const Navbar = () => {
               müsahibə<span className="text-blue-500">.</span>az
             </p>
             <div className="sm:flex space-x-4 items-center hidden">
+           
+              <SearchInput/>
               <ThemeToggleButton />
               <SignInSubscribeBtns />
+              
             </div>
 
             {/* Hamburger menu icon */}
             <BurgerMenuIcon isOpen={isOpen} setIsOpen={setIsOpen} />
           </div>
-          <div className="w-full sm:border-b-[1px] sm:border-foreground py-2">
+          <div className="w-full mx-auto sm:border-b-[1px] sm:border-foreground py-2">
             <ul className="mx-auto w-[90%] hidden sm:flex justify-center space-x-4 lg:space-x-6 text-[12px] md:text-base">
               {menuItems.map((item, index) => (
                 <li key={index} className="cursor-pointer w-fit">
@@ -141,26 +97,9 @@ const Navbar = () => {
           </div>
           {/* Mobil menü */}
           <MobileMenu menuItems={menuItems} isOpen={isOpen} setIsOpen={setIsOpen} />
+         
+         <TagComponent/>
 
-          <div
-            className="w-full px-3 py-1 mx-auto flex overflow-x-scroll gap-2"
-            ref={scrollContainerRef}
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUpOrLeave}
-            onMouseLeave={handleMouseUpOrLeave}
-            style={{ cursor: "grab" }}
-          >
-            {newsHeadlines.map((item, index) => (
-              <Link
-                key={index}
-                to={`/search/${item}`}
-                className="block w-max whitespace-nowrap  text-xs py-1  border border-foreground cursor-pointer rounded-full px-2"
-              >
-                {item}
-              </Link>
-            ))}
-          </div>
         </div>
       </nav>
     </Container>
